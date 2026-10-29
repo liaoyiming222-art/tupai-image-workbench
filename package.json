@@ -1,0 +1,17 @@
+{
+  "name": "tupai-image-workbench",
+  "version": "1.0.0",
+  "private": true,
+  "description": "图派：基于 RunningHub 的本地 AI 批量作图工作台",
+  "author": "liaoyiming222-art",
+  "license": "UNLICENSED",
+  "repository": { "type": "git", "url": "https://github.com/liaoyiming222-art/tupai-image-workbench.git" },
+  "bugs": { "url": "https://github.com/liaoyiming222-art/tupai-image-workbench/issues" },
+  "homepage": "https://github.com/liaoyiming222-art/tupai-image-workbench#readme",
+  "type": "module",
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node --test"
+  },
+  "engines": { "node": ">=22" }
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "图派作图需求",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["作图需求"],
+  "properties": {
+    "作图需求": {
+      "type": "array",
+      "maxItems": 5000,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["任务编号", "处理分类", "要处理的图片", "参考图编号", "具体要求", "输出比例"],
+        "properties": {
+          "任务编号": {"type": "string", "pattern": "^[A-Za-z0-9_-]{1,80}$"},
+          "处理分类": {"enum": ["局部重绘-Gemini", "局部重绘-gpt"]},
+          "要处理的图片": {"type": "string", "pattern": "^图片[1-9][0-9]*$"},
+          "参考图编号": {"type": "array", "items": {"type": "string", "pattern": "^图片[1-9][0-9]*$"}},
+          "具体要求": {"type": "string", "minLength": 1},
+          "输出比例": {"type": ["string", "null"], "pattern": "^[1-9][0-9]*:[1-9][0-9]*$"}
+        }
+      }
+    }
+  }
+}

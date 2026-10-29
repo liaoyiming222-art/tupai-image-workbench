@@ -1,0 +1,25 @@
+.local/
+node_modules/
+test-output/
+
+# Local preview screenshots may contain personal paths and customer images.
+/预览/
+/dist/
+/release/
+*.log
+*.pid
+*.tmp
+*.exe
+*.dll
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Generated outputs must stay on the user's computer.
+**/AI/**
+!**/AI/.gitkeep

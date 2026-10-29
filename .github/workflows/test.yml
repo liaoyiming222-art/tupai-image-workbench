@@ -1,0 +1,21 @@
+name: Tests
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  windows:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        node: [22, 24]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Prepare Windows helper
+        run: node --input-type=module -e "import {buildPicker} from './lib/folder-picker.mjs'; await buildPicker();"
+      - name: Run tests without real API calls
+        run: npm test
