@@ -25,6 +25,6 @@ test('演示部署目录仅包含静态演示内容，不包含本地服务和�
  assert.ok(!fs.existsSync('demo/public/server.mjs'));assert.ok(!fs.existsSync('demo/public/.local'));
  const source=fs.readFileSync('demo/public/transport.mjs','utf8');assert.doesNotMatch(source,/\bfetch\s*\(|localStorage|indexedDB|apiKey\s*:/);
  assert.match(fs.readFileSync('demo/public/index.html','utf8'),/在线演示版/);
- assert.match(fs.readFileSync('demo/public/index.html','utf8'),/使用模拟数据/);
+ assert.match(fs.readFileSync('demo/public/index.html','utf8'),/使用示例素材与模拟结果/);
  assert.equal(JSON.parse(fs.readFileSync('package.json')).license,'UNLICENSED');
 });
