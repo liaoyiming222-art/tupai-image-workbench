@@ -6,6 +6,15 @@
 
 作者：[liaoyiming222-art](https://github.com/liaoyiming222-art)
 
+## 两个版本
+
+| 版本 | 用途 | 启动方式 |
+| --- | --- | --- |
+| 本地版 | 真实目录读取、RunningHub 生图、结果回存 | 双击“图派启动器.exe”或桌面“图派”快捷方式 |
+| 在线演示版 | 示例导入、编号映射、模拟队列及预设结果展示 | [打开在线演示](https://tupai-image-workbench.vercel.app/) |
+
+在线演示仅发布 demo/ 下的静态文件，不读取个人素材、不收集真实 Key、不调用真实生图接口；刷新或重置后恢复示例。真实作图请使用本地版。
+
 ## 功能
 
 - 批量导入需求文件夹，支持上级目录扫描和多条路径。
@@ -28,7 +37,13 @@ npm start
 
 打开 [http://127.0.0.1:5137/](http://127.0.0.1:5137/)。
 
-Windows 也可以双击 `启动工作台.cmd`，后台启动并打开浏览器；停止时双击 `停止工作台.cmd`。这两个启动/停止脚本使用 PowerShell；页面中的“选择文件夹”和“打开文件夹”直接使用本地 Windows 组件，不调用 PowerShell。首次使用目录组件时，通过 Windows 自带 .NET Framework 编译器编译 `native/FolderPicker.cs`。
+Windows 推荐从 [Releases](https://github.com/liaoyiming222-art/tupai-image-workbench/releases/latest) 下载本地版并解压，安装 Node.js 22 或更新版本后双击 `图派启动器.exe`。启动器会检测已有服务、后台启动并等待就绪，然后打开独立的 Edge 应用窗口（找不到 Edge 时使用默认浏览器），不需要打开 Codex 或手动输入地址。
+
+从源码使用时，双击 `启动工作台.cmd`，会在首次启动时用 Windows .NET Framework 编译启动器。停止时双击 `停止工作台.cmd`；这两个主入口均不调用 PowerShell。原有 `.ps1` 文件仅作兼容保留。首次使用目录组件时，通过 Windows 自带 .NET Framework 编译器编译 `native/FolderPicker.cs`。
+
+生成带图标的启动器：`npm run build:launcher`。创建桌面快捷方式：双击 `创建桌面快捷方式.cmd`，或在项目目录运行 `图派启动器.exe --install-shortcut`。快捷方式指向项目中的 exe，不要把 exe 单独移出项目目录。首次版本依赖本机 Node.js，未捆绑运行环境。
+
+关闭应用窗口不会立即结束本地服务；停止服务使用停止入口，有活动任务时会提示先等待当前任务完成。启动日志在 `.local/service.log`，启动器错误在 `.local/launcher.log`。
 
 终端启动可使用 `Ctrl+C` 停止。重启后保留记录，队列默认暂停。端口冲突时可通过环境变量 `PORT` 指定其他端口。
 
@@ -176,10 +191,13 @@ public/      工作台页面、图标和结果预览
 scripts/     测试素材生成
 tests/       自动化测试
 docs/        需求模板、格式校验和设计说明
+demo/        独立静态演示版本（生成文件与模拟数据层）
 示例需求/     可直接导入的示例
 ```
 
 修改贡献见 [CONTRIBUTING.md](CONTRIBUTING.md)，版本记录见 [CHANGELOG.md](CHANGELOG.md)。
+
+演示版构建：`npm run build:demo`；检查生成文件同步：`npm run check:demo`；本地演示预览：`npm run preview:demo`。Vercel 使用 demo 作为根目录，Other 预设，输出 public，无服务端函数。演示与本地版复用界面、模型目录和编号映射代码，只有数据访问层不同。
 
 ## API 依据
 

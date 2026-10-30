@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>图派 · 在线演示版</title><link rel="icon" href="/icon.svg" type="image/svg+xml"><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="/finishing.css"><meta name="description" content="图派 AI 批量作图工作台在线演示：使用示例体验导入、图片编号映射、模型选择、队列和结果归档。"><link rel="stylesheet" href="/demo.css"></head>
+<body class="demo-mode">
+<aside class="sidebar">
+  <div class="brand"><span class="brand-icon" aria-hidden="true"></span><div>图派<span>LOCAL IMAGE STUDIO</span></div></div>
+  <div class="nav-label">工作空间</div>
+  <nav><button class="nav active" data-page="tasks"><span>▦</span>批量任务<i id="nav-count">0</i></button><button class="nav" data-page="settings"><span>⊞</span>API 设置</button><button class="nav" data-page="history"><span>◷</span>运行记录</button></nav>
+  <div class="sidebar-note"><span class="live-dot"></span> 交互演示 · 模拟执行<p>体验作图流程<br>示例素材与模拟结果</p></div>
+  <div class="sidebar-footer">图派工作台 <span>v1.1</span></div>
+</aside>
+<div class="demo-banner"><strong>在线演示版</strong><p>使用模拟数据与预设结果，真实作图请使用本地版。</p><button class="button small" data-action="reset-demo">重置演示</button><a href="https://github.com/liaoyiming222-art/tupai-image-workbench/releases/latest" target="_blank" rel="noopener">获取本地版 ↗</a></div><div class="app"><header class="topbar"><div><span class="breadcrumb">工作空间</span><span class="slash">/</span><strong id="page-label">批量任务</strong></div><div class="top-status"><span class="live-dot"></span><span id="connection">模拟环境已就绪</span><button class="account-status" id="account-status" data-page="settings">API Key 待配置</button></div></header><main id="main"></main><footer class="app-footer">图派 · 在线演示版<span>演示素材 · 未调用真实生图接口</span></footer></div>
+<dialog id="detail-dialog"><div class="dialog-shell"><div class="dialog-header"><div><span class="eyebrow">TASK INSPECTOR</span><h2 id="detail-title">任务详情</h2></div><button class="icon-button" id="close-detail" aria-label="关闭详情">×</button></div><div id="detail-body"></div></div></dialog>
+<div id="toast" role="status"></div><script src="/app.js" type="module"></script>
+</body></html>

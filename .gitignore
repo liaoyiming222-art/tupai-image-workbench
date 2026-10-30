@@ -1,5 +1,6 @@
 .local/
 node_modules/
+.vercel/
 test-output/
 
 # Local preview screenshots may contain personal paths and customer images.

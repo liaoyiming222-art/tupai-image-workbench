@@ -22,4 +22,6 @@ npm test
 5. 运行测试，检查提交列表不含 `.local/`、个人路径截图、API Key、业务图片和 AI 输出。
 6. 在 Pull Request 中说明改动与验证方式。
 
+修改共用页面、模型目录或编号映射后运行 `npm run build:demo`，同步生成 demo/public，再运行 `npm run check:demo`。在线演示不得引入真实模型调用、个人素材或真实 Key 输入。Windows 原生组件相关测试按文件串行执行。
+
 问题反馈请包含操作步骤、预期和实际结果；截图、日志须去除 Key、客户素材和个人信息。

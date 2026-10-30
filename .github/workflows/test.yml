@@ -19,3 +19,7 @@ jobs:
         run: node --input-type=module -e "import {buildPicker} from './lib/folder-picker.mjs'; await buildPicker();"
       - name: Run tests without real API calls
         run: npm test
+      - name: Check demo assets
+        run: npm run check:demo
+      - name: Build local launcher
+        run: npm run build:launcher

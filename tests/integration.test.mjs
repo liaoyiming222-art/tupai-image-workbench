@@ -41,7 +41,7 @@ test('完整链路：两类任务共享 Key、编号转换、null 自适应、�
   await ctx.call('/api/import',{paths:[a,b]});
   const tasks=ctx.app.snapshot().tasks;assert.equal(tasks.length,2);
   assert.equal((await ctx.call('/api/start',{ids:tasks.map(t=>t.id)})).data.added,2);
-  await until(()=>ctx.app.snapshot().jobs.length===2&&ctx.app.snapshot().jobs.every(j=>j.status==='completed'));
+  await until(()=>ctx.app.snapshot().jobs.length===2&&ctx.app.snapshot().jobs.every(j=>j.status==='completed')).catch(error=>{error.message+=' '+JSON.stringify(ctx.app.snapshot().jobs.map(j=>({status:j.status,error:j.error})));throw error;});
   assert.equal(ctx.submits.length,2);
   const nano=ctx.submits.find(r=>r.url==='/openapi/v2/rhart-image-n-g31-flash/image-to-image'),gpt=ctx.submits.find(r=>r.url==='/openapi/v2/rhart-image-g-2/image-to-image');assert.ok(nano);assert.ok(gpt);
   assert.ok(ctx.submits.every(row=>row.key==='Bearer shared-test-key'));

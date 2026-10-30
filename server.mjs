@@ -150,9 +150,9 @@ export function createApp({dataDir=path.join(ROOT,'.local'),pollInterval=5000,ke
         const bytes=fs.readFileSync(job.resultPath);res.writeHead(200,{'Content-Type':imageType(bytes).mime,'Cache-Control':'no-store'});res.end(bytes);return;
       }
       if(req.method==='GET'&&!route.startsWith('/api/')){
-        const allowed={'/':'index.html','/app.js':'app.js','/style.css':'style.css','/finishing.css':'finishing.css','/viewer.css':'viewer.css','/icon.svg':'icon.svg'},file=allowed[route];
+        const allowed={'/':'index.html','/app.js':'app.js','/transport.mjs':'transport.mjs','/style.css':'style.css','/finishing.css':'finishing.css','/viewer.css':'viewer.css','/icon.svg':'icon.svg'},file=allowed[route];
         if(!file){send(res,404,{error:'页面不存在'});return;}
-        res.writeHead(200,{'Content-Type':file.endsWith('.svg')?'image/svg+xml':file.endsWith('.js')?'text/javascript; charset=utf-8':file.endsWith('.css')?'text/css; charset=utf-8':'text/html; charset=utf-8','Cache-Control':'no-store'});res.end(fs.readFileSync(path.join(ROOT,'public',file)));return;
+        res.writeHead(200,{'Content-Type':file.endsWith('.svg')?'image/svg+xml':/\.m?js$/.test(file)?'text/javascript; charset=utf-8':file.endsWith('.css')?'text/css; charset=utf-8':'text/html; charset=utf-8','Cache-Control':'no-store'});res.end(fs.readFileSync(path.join(ROOT,'public',file)));return;
       }
       if(req.method!=='POST'){send(res,405,{error:'不支持的方法'});return;}
       if(req.headers['x-local-token']!==token || (req.headers.origin&&!['http://'+authority,`http://localhost:${address.port}`].includes(req.headers.origin))){send(res,403,{error:'请从本机工具页面操作'});return;}
