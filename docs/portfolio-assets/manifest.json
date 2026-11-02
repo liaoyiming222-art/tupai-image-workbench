@@ -1,0 +1,241 @@
+{
+  "schemaVersion": 1,
+  "productId": "tupai-image-workbench",
+  "name": "图派",
+  "repository": "https://github.com/liaoyiming222-art/tupai-image-workbench",
+  "branch": "codex/portfolio-assets",
+  "uiCodeCommit": "f5a1da33ca78b2e543a782cac5fa931392cec95b",
+  "createdOn": "2026-11-02",
+  "timezone": "Asia/Shanghai",
+  "platform": "Windows 10/11 + Node.js >=22",
+  "uiCapture": {
+    "entry": "demo/public/index.html",
+    "viewport": {
+      "width": 1600,
+      "height": 1000,
+      "deviceScaleFactor": 1
+    },
+    "recipe": "source/capture.json",
+    "dataKind": "虚构示例数据、模拟执行与预设SVG示意图",
+    "paidServicesUsed": false,
+    "personalDataUsed": false
+  },
+  "capabilities": [
+    "读取需求目录及六字段JSON",
+    "按分类或手动选择两种内置模型",
+    "图片引用编号转换",
+    "队列暂停与恢复",
+    "失败任务继续查询或下载",
+    "结果回存原需求AI目录并增加版本",
+    "运行记录筛选及数据看板"
+  ],
+  "boundaries": [
+    "本地版通过RunningHub调用模型，实际生成可能收费；本次未调用",
+    "在线演示仅在内存模拟，不读取真实目录，不接收真实Key，不访问生成服务",
+    "截图中的已完成、失败、产出和成功率均为示例状态，不代表真实生产效果",
+    "场景插画来自项目内程序生成的SVG，非AI生成效果",
+    "窄屏图仅用于手机浏览作品集，不表示产品支持手机安装或移动端生图",
+    "不修改造物集仓库；通过固定素材提交接入"
+  ],
+  "icon": {
+    "provenance": "沿用 public/icon.svg，无形状或颜色改写",
+    "smallSizesChecked": [
+      32,
+      40
+    ]
+  },
+  "production": {
+    "method": "实际浏览器拍摄 + Canvas独立排版 + Sharp编码；未重绘产品UI",
+    "font": "Microsoft YaHei（系统字体，不嵌入或分发字体文件）",
+    "source": "source/build.mjs",
+    "dependencies": "package.json",
+    "externalAssets": [],
+    "allAssetPathsRelative": true
+  },
+  "uiFiles": [
+    {
+      "path": "demo/public/index.html",
+      "sha256": "2e7a371b434eee3a10be315357129bc2210b95b0b403e0f58e629c2743857206",
+      "normalization": "UTF-8 LF"
+    },
+    {
+      "path": "demo/public/app.js",
+      "sha256": "51cf3a267ac277c9a77ecb3be1ea93d7c7733033fe83a8fe127240bad47f0688",
+      "normalization": "UTF-8 LF"
+    },
+    {
+      "path": "demo/public/style.css",
+      "sha256": "f1f5ab745e7386b467b2bd44c4c1f75d29912d0862b0fc1d502590e3e376450a",
+      "normalization": "UTF-8 LF"
+    },
+    {
+      "path": "demo/public/finishing.css",
+      "sha256": "b9751c4228eec87ac12d9941e701637b83737dfc66d9eed94066b4259b79ea8f",
+      "normalization": "UTF-8 LF"
+    },
+    {
+      "path": "demo/public/transport.mjs",
+      "sha256": "e4e7bb905ae2b75a72c8db7268a1113f059c7381e78830acee094168bc7f7b9e",
+      "normalization": "UTF-8 LF"
+    },
+    {
+      "path": "demo/public/reporting.mjs",
+      "sha256": "daa2148b268c16d6b3bec85fcaabbe3f7293a5e701f8536445775464178ac87d",
+      "normalization": "UTF-8 LF"
+    },
+    {
+      "path": "demo/public/icon.svg",
+      "sha256": "83a989b184d46c19600d3540196d69b1a38b8eb55158740ef7946d13a48ec15c",
+      "normalization": "UTF-8 LF"
+    }
+  ],
+  "images": [
+    {
+      "path": "icon.svg",
+      "alt": "图派正式图标：深绿底色上叠放的图片与浅金色星芒",
+      "purpose": "品牌图标，可用于32px、40px及更大尺寸",
+      "sources": [
+        "../../public/icon.svg"
+      ],
+      "composition": "逐字节沿用项目已有正式矢量图标",
+      "width": 64,
+      "height": 64,
+      "format": "svg",
+      "bytes": 411,
+      "sha256": "83a989b184d46c19600d3540196d69b1a38b8eb55158740ef7946d13a48ec15c"
+    },
+    {
+      "path": "icon-512.png",
+      "alt": "图派512像素正式图标",
+      "purpose": "造物集产品图标",
+      "sources": [
+        "icon.svg"
+      ],
+      "composition": "正式SVG图标高质量栅格化，512×512",
+      "width": 512,
+      "height": 512,
+      "format": "png",
+      "bytes": 17213,
+      "sha256": "13bf5b0c6110480b312b5d72f7955c6627fc0fcc39f5750d5e3a51a989dc1ee5"
+    },
+    {
+      "path": "hero.webp",
+      "alt": "图派本地 AI 批量作图工作台：有序任务清单、模型选择和执行状态，截图为在线演示虚构数据",
+      "purpose": "造物集首页展台",
+      "sources": [
+        "icon.svg",
+        "source/batch.png"
+      ],
+      "composition": "1920×1200 横向展台；上方品牌与用途，下方放大任务列表真实局部",
+      "width": 1920,
+      "height": 1200,
+      "format": "webp",
+      "bytes": 96576,
+      "sha256": "f4657b00509009462548c6a29e695643619f0d7c711fc1fd6482ffa3d0062ed1"
+    },
+    {
+      "path": "card.webp",
+      "alt": "图派作品卡片：把零散需求排成一张清单，展示真实任务列表局部和按分类选择模型",
+      "purpose": "造物集作品卡片",
+      "sources": [
+        "icon.svg",
+        "source/batch.png"
+      ],
+      "composition": "1200×900 卡片；双行标题，右侧能力短语，下方紧凑任务局部，独立排版",
+      "width": 1200,
+      "height": 900,
+      "format": "webp",
+      "bytes": 59134,
+      "sha256": "e36dc085a9451e8a6b8890951d64c0a5fbe441d9a9d40a5221712ca7f2327aa0"
+    },
+    {
+      "path": "mobile.webp",
+      "alt": "图派窄屏宣传图：纵向标题与桌面任务清单局部，明确标注 Windows 本地工具和虚构示例数据",
+      "purpose": "造物集手机浏览与窄屏展示；不表示支持手机安装",
+      "sources": [
+        "icon.svg",
+        "source/batch.png"
+      ],
+      "composition": "900×1200 专用纵向构图；独立双行标题，只截取桌面列表左侧800像素，未将桌面整图缩小",
+      "width": 900,
+      "height": 1200,
+      "format": "webp",
+      "bytes": 64936,
+      "sha256": "abca2f118dc798e3aa1591025b736435b4a5fdb53cd89e6aa0a49e89261347cf"
+    },
+    {
+      "path": "detail-01.webp",
+      "alt": "图派图片编号映射详情：文件夹图片3自动对应为模型输入图片2，右侧为真实运行的任务详情与发送提示词预览",
+      "purpose": "造物集详情页关键功能图",
+      "sources": [
+        "icon.svg",
+        "source/mapping.png"
+      ],
+      "composition": "1920×1200 深绿双栏；左侧解释真实示例编号，右侧展示完整任务详情截图，与主图展示不同功能",
+      "width": 1920,
+      "height": 1200,
+      "format": "webp",
+      "bytes": 102122,
+      "sha256": "3b3850575cafaa1e91b11b3aa36aca9d591818113851d7d8fee1bcda319b59cd"
+    },
+    {
+      "path": "source/batch.png",
+      "alt": "刷新后的初始批量任务页，未经重绘或修改",
+      "purpose": "真实界面原始拍摄素材",
+      "sources": [
+        "../../demo/public/index.html"
+      ],
+      "composition": "刷新后的初始批量任务页，未经重绘或修改",
+      "width": 1600,
+      "height": 1000,
+      "format": "jpeg",
+      "bytes": 75700,
+      "sha256": "8f6a5f9aa27520ea34f37eada3de119ce1617cb1210f23f437022656da0d42f7"
+    },
+    {
+      "path": "source/mapping.png",
+      "alt": "第二条任务的详情，展开图片编号映射和发送提示词预览；只裁取实际 dialog，原屏矩形 x=300,y=80,width=1000,height=840",
+      "purpose": "真实界面原始拍摄素材",
+      "sources": [
+        "../../demo/public/index.html"
+      ],
+      "composition": "第二条任务的详情，展开图片编号映射和发送提示词预览；只裁取实际 dialog，原屏矩形 x=300,y=80,width=1000,height=840",
+      "width": 1000,
+      "height": 840,
+      "format": "jpeg",
+      "bytes": 49195,
+      "sha256": "33e4e1c144db86bccde4ce0a3c031ed836aa59403fd60b6c41358f3626d30269"
+    },
+    {
+      "path": "source/history.png",
+      "alt": "初始运行记录页，展示两条模拟执行记录，未经重绘或修改",
+      "purpose": "真实界面原始拍摄素材",
+      "sources": [
+        "../../demo/public/index.html"
+      ],
+      "composition": "初始运行记录页，展示两条模拟执行记录，未经重绘或修改",
+      "width": 1600,
+      "height": 1000,
+      "format": "jpeg",
+      "bytes": 60976,
+      "sha256": "60d4b4c9d1dc9befa14b84a64f755dfa3a8483143c84f9c74216fb454e37f5af"
+    },
+    {
+      "path": "source/display-check.webp",
+      "alt": "首页960像素、卡片400像素、窄屏360像素与32和40像素图标的浅深背景展示检查",
+      "purpose": "视觉验收联系表",
+      "sources": [
+        "hero.webp",
+        "card.webp",
+        "mobile.webp",
+        "icon.svg"
+      ],
+      "composition": "按照实际展示尺寸组合，不用于产品界面宣传",
+      "width": 1440,
+      "height": 1100,
+      "format": "webp",
+      "bytes": 90246,
+      "sha256": "cfa473c8e89d96c844394a95b8d4598d550d973e490445ef16e605824f54a747"
+    }
+  ]
+}

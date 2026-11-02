@@ -1,8 +1,12 @@
-<p align="center"><img src="public/icon.svg" width="88" alt="图派图标"></p>
+<p align="center"><img src="docs/portfolio-assets/icon.svg" width="88" alt="图派图标"></p>
 
 # 图派 · AI 批量作图工作台
 
 基于 RunningHub 的 Windows 本地 AI 批量作图工具。读取需求文件夹，把每条需求列为任务，自动处理原图与参考图的编号对应，生成结果回存各自的 `AI` 子文件夹。
+
+![图派 · 本地 AI 批量作图工作台，界面为虚构示例数据](docs/portfolio-assets/hero.webp)
+
+作品展示：[造物集宣传素材、图标与制作说明](docs/portfolio-assets/README.md) · [素材清单 manifest](docs/portfolio-assets/manifest.json)。图中为实际运行的在线演示，使用虚构数据与预设示意图，未调用真实生图服务。
 
 作者：[liaoyiming222-art](https://github.com/liaoyiming222-art)
 
@@ -17,7 +21,8 @@
 
 ## 功能
 
-- 批量导入需求文件夹，支持上级目录扫描和多条路径。
+- 多目录清单：复制文件夹后在导入区按 Ctrl+V，或点击“粘贴文件夹”；也可使用原生目录多选。
+- 支持上级目录扫描、父子目录去重、失效路径提示。添加目录后点击“扫描并导入”，再执行当前列表任务；历史执行在运行记录中查询。
 - 一个 RunningHub API Key，调用 Nano Banana 2 和 GPT Image 2.0。
 - 按处理分类自动选择模型，也可手动指定本次使用的模型。
 - 自动转换提示词中的图片编号，保持图片输入顺序与文字引用一致。
@@ -126,7 +131,7 @@ Windows 推荐从 [Releases](https://github.com/liaoyiming222-art/tupai-image-wo
    └─ 作图需求.json
 ```
 
-选择“本批需求”并启用“扫描子文件夹”，或者粘贴多个需求目录的完整路径，每行一条。原图目录、AI 目录和隐藏目录不会继续扫描。
+选择“本批需求”并启用“扫描子文件夹”，或者在资源管理器复制多个需求目录，再在导入区按 Ctrl+V 或点击“粘贴文件夹”。原图目录、AI 目录和隐藏目录不会继续扫描。
 
 仓库附带两个纯色图片示例，点击页面“载入示例”即可检查导入与编号转换；示例不能用于评价真实产品图效果。Git 不保存空文件夹，示例 `AI/` 中的 `.gitkeep` 仅用于保留目录。
 
