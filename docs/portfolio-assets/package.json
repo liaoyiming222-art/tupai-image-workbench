@@ -1,0 +1,7 @@
+{
+  "name": "tupai-portfolio-assets",
+  "private": true,
+  "type": "module",
+  "scripts": {"build": "node source/build.mjs", "verify": "node source/build.mjs --verify"},
+  "devDependencies": {"@napi-rs/canvas": "0.1.100", "sharp": "0.35.5"}
+}

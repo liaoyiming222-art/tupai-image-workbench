@@ -1,8 +1,9 @@
 import {planTask} from './task-plan.mjs';
 import {defaultProviders,MODEL_BINDINGS} from './catalog.mjs';
+import {reportJobs,dashboard} from './reporting.mjs';
 export const isDemo=true;
 const root='/示例需求',profiles=defaultProviders();
-let tasks,jobs,hasKey,paused,serial;
+let tasks,jobs,hasKey,paused,serial,batches,currentBatchId,minutes,pickerDialog;
 const names=['客厅_窗帘调整','餐厅_画面扩展'];
 function createTask(i){
  const folderName=names[i<2?0:1],category=i%2?'局部重绘-gpt':'局部重绘-Gemini';
@@ -11,11 +12,12 @@ function createTask(i){
 function provider(t,choice='auto'){return profiles.find(p=>p.id===(choice==='auto'?MODEL_BINDINGS[t.data.处理分类]:choice));}
 function jobFor(t,choice='auto'){
  const p=provider(t,choice),date=new Date().toISOString();
- return{id:'demo-job-'+(++serial),taskId:t.id,taskNumber:t.data.任务编号,folder:t.folder,folderName:t.folderName,category:t.data.处理分类,providerName:p.name,status:'queued',createdAt:date,updatedAt:date,plan:planTask(t,p),remoteId:'',resultPath:'',resultCount:0,error:'',canResume:false};
+ return{id:'demo-job-'+(++serial),taskId:t.id,taskNumber:t.data.任务编号,folder:t.folder,folderName:t.folderName,category:t.data.处理分类,provider:p,providerName:p.name,batchId:currentBatchId,submissionCount:1,savedCount:0,status:'queued',createdAt:date,updatedAt:date,plan:planTask(t,p),remoteId:'',resultPath:'',resultCount:0,error:'',canResume:false};
 }
 function reset(){
  serial=0;hasKey=true;paused=true;tasks=Array.from({length:4},(_,i)=>createTask(i));
- const done=jobFor(tasks[0]);Object.assign(done,{status:'completed',remoteId:'demo-remote-001',resultPath:tasks[0].folder+'/AI/T001_01.svg',resultCount:1});
+ minutes=10;currentBatchId='demo-initial';batches=[{id:currentBatchId,name:'示例需求',paths:[root],taskIds:tasks.map(t=>t.id)}];
+ const done=jobFor(tasks[0]);Object.assign(done,{status:'completed',remoteId:'demo-remote-001',resultPath:tasks[0].folder+'/AI/T001_01.svg',resultCount:1,savedCount:1});
  const failed=jobFor(tasks[3]);Object.assign(failed,{status:'failed',remoteId:'demo-remote-002',canResume:true,error:'演示：结果下载中断，可点击“继续查询 / 下载”体验恢复。'});jobs=[done,failed];
 }
 reset();
@@ -26,38 +28,49 @@ function progress(){
   const time=now-j.started;
   j.status=time<1200?'uploading':time<2400?'submitting':time<6500?'polling':time<7800?'saving':'completed';
   if(time>=2400)j.remoteId||='demo-remote-'+j.id;
-  if(j.status==='completed'){j.resultPath=j.folder+'/AI/'+j.taskNumber+'_演示.svg';j.resultCount=1;j.canResume=false;}
+  if(j.status==='completed'){j.resultPath=j.folder+'/AI/'+j.taskNumber+'_演示.svg';j.resultCount=1;j.savedCount=1;j.canResume=false;}
   j.updatedAt=new Date().toISOString();
  }
  if(!paused&&!jobs.some(j=>['uploading','submitting','polling','saving'].includes(j.status))){const next=jobs.find(j=>j.status==='queued');if(next){next.started=now;next.status='uploading';}}
 }
 function snapshot(choice){
  progress();
- return{token:'demo-only',examplePath:root,lastFolderChoice:root,baseUrl:'演示环境',hasKey,credentialNotice:'',concurrency:1,paused,active:jobs.filter(j=>['uploading','submitting','polling','saving'].includes(j.status)).length,providers:profiles,bindings:MODEL_BINDINGS,jobs:[...jobs].reverse().slice(0,300),tasks:tasks.map(t=>{
+ return{token:'demo-only',examplePath:root,lastFolderChoice:root,baseUrl:'演示环境',hasKey,credentialNotice:'',batches,currentBatchId,queueCount:jobs.filter(j=>j.status==='queued').length,otherBatchActive:jobs.filter(j=>['queued','uploading','submitting','polling','saving'].includes(j.status)&&!batches.find(b=>b.id===currentBatchId)?.taskIds.includes(j.taskId)).length,concurrency:1,paused,active:jobs.filter(j=>['uploading','submitting','polling','saving'].includes(j.status)).length,providers:profiles,bindings:MODEL_BINDINGS,jobs:[...jobs].reverse().slice(0,300),tasks:tasks.map(t=>{
   const p=provider(t,choice),plan=planTask(t,p),last=jobs.findLast(j=>j.taskId===t.id),errors=[];
   if(!hasKey)errors.push('请保存虚拟演示配置后体验执行');
   if(plan.ratio&&!p.allowedAspectRatios.includes(plan.ratio))errors.push(p.name+' 不支持该比例');
-  return{...t,plan,providerName:p.name,providerId:p.id,configErrors:errors,status:last?.status||(errors.length?'unconfigured':'ready'),latestJob:last||null};
+  const current=last?.plan.effectivePrompt===plan.effectivePrompt?last:null;
+  return{...t,plan,providerName:p.name,providerId:p.id,configErrors:errors,status:current?.status||(errors.length?'unconfigured':'ready'),latestJob:last||null};
  })};
 }
 function picker(){
  return new Promise(resolve=>{
-  const d=document.createElement('dialog');d.className='demo-picker';
+  const d=document.createElement('dialog');pickerDialog=d;d.className='demo-picker';
   d.innerHTML='<div class="dialog-header"><div><span class="eyebrow">DEMO FOLDERS</span><h2>选择示例需求</h2></div></div><div class="form-body"><p class="subtitle">在线演示使用虚拟目录，真实文件夹请在本地版选择。</p><button class="demo-folder" data-folder="all"><strong>▱ 全部示例需求</strong><span>2 个目录 · 4 条作图任务</span></button>'+names.map((n,i)=>'<button class="demo-folder" data-folder="'+i+'"><strong>▱ '+n+'</strong><span>2 条作图任务</span></button>').join('')+'<button class="button" data-cancel>取消</button></div>';
-  const close=value=>{d.close();d.remove();resolve({path:value});};
+  const close=value=>{d.close();d.remove();pickerDialog=null;resolve(folderEntries(value?[value]:[]));};
   d.addEventListener('cancel',e=>{e.preventDefault();close('');});
+  d.addEventListener('demo-cancel',()=>close(''));
   d.addEventListener('click',e=>{const folder=e.target.closest('[data-folder]');if(folder)close(folder.dataset.folder==='all'?root:root+'/'+names[Number(folder.dataset.folder)]);else if(e.target.closest('[data-cancel]'))close('');});
   document.body.append(d);d.showModal();
  });
 }
+function folderEntries(paths){const valid=[...new Set(paths)].filter(p=>p===root||names.some(n=>p===root+'/'+n));return{paths:valid,entries:valid.map(p=>({path:p,name:p.split('/').at(-1)})),duplicates:paths.length-new Set(paths).size,skipped:paths.length-valid.length};}
 export async function request(route,body){
  const url=new URL(route,'https://demo.invalid'),action=url.pathname;
  if(action==='/api/state')return structuredClone(snapshot(url.searchParams.get('modelChoice')||'auto'));
  if(action==='/api/demo-reset'){reset();return{ok:true};}
  if(action==='/api/pick-folder')return picker();
+ if(action==='/api/cancel-pick-folder'){pickerDialog?.dispatchEvent(new Event('demo-cancel'));return{ok:true};}
+ if(action==='/api/clipboard-folders')return folderEntries(names.map(n=>root+'/'+n));
+ if(action==='/api/validate-folders')return folderEntries(Array.isArray(body.paths)?body.paths:String(body.paths||'').split(/\r?\n/));
+ if(action==='/api/history'){progress();return structuredClone(reportJobs(jobs,batches,url.searchParams));}
+ if(action==='/api/job'){const j=jobs.find(j=>j.id===url.searchParams.get('id'));if(!j)throw Error('演示记录不存在');return structuredClone(j);}
+ if(action==='/api/dashboard'){progress();return structuredClone(dashboard(jobs,url.searchParams,minutes));}
+ if(action==='/api/time-setting'){const n=Number(body.minutes);if(!Number.isFinite(n)||n<0.001||n>1440)throw Error('请输入有效分钟数');minutes=n;return{ok:true};}
  if(action==='/api/import'){
-  const chosen=body.paths||[],ids=new Set(tasks.map(t=>t.id));let added=0,updated=0;const folders=new Set();
-  for(let i=0;i<4;i++){const t=createTask(i);if(!chosen.some(p=>p===root||p===t.folder))continue;folders.add(t.folder);if(ids.has(t.id)){updated++;continue;}tasks.push(t);ids.add(t.id);added++;}
+  const chosen=body.paths||[],ids=new Set(tasks.map(t=>t.id)),members=[];let added=0,updated=0;const folders=new Set();
+  for(let i=0;i<4;i++){const t=createTask(i);if(!chosen.some(p=>p===root||p===t.folder))continue;folders.add(t.folder);members.push(t.id);if(ids.has(t.id)){updated++;continue;}tasks.push(t);ids.add(t.id);added++;}
+  if(members.length){currentBatchId='demo-import-'+(batches.length+1);batches.push({id:currentBatchId,name:'示例导入 '+batches.length,paths:chosen,taskIds:members});}
   return{folders:folders.size,added,updated,warnings:folders.size?[]:['请选择演示中的示例目录。']};
  }
  if(action==='/api/account'){hasKey=!body.clearKey;return{ok:true};}
@@ -75,8 +88,9 @@ export async function request(route,body){
  if(action==='/api/override'){
   const t=tasks.find(t=>t.id===body.id);if(!t)throw Error('演示任务不存在');
   if(jobs.some(j=>j.taskId===t.id&&['queued','uploading','submitting','polling','saving'].includes(j.status)))throw Error('请等待模拟执行结束');
-  const old=t.override;t.override=body.prompt||undefined;try{planTask(t,provider(t));}catch(e){t.override=old;throw e;}jobs=jobs.filter(j=>j.taskId!==t.id);return{ok:true};
+  const old=t.override;t.override=body.prompt||undefined;try{planTask(t,provider(t));}catch(e){t.override=old;throw e;}return{ok:true};
  }
+ if(action==='/api/batch-remove'){const b=batches.find(b=>b.id===body.batchId);if(!b)throw Error('示例批次不存在');const ids=new Set(body.all?b.taskIds:body.ids||[]),blocked=new Set(jobs.filter(j=>['queued','uploading','submitting','polling','saving'].includes(j.status)).map(j=>j.taskId));let removed=0,skipped=0;b.taskIds=b.taskIds.filter(id=>{if(!ids.has(id))return true;if(blocked.has(id)){skipped++;return true;}removed++;return false;});return{removed,skipped};}
  if(action==='/api/remove'){const count=tasks.length;const blocked=new Set(jobs.filter(j=>['queued','uploading','submitting','polling','saving'].includes(j.status)).map(j=>j.taskId));tasks=tasks.filter(t=>!body.ids?.includes(t.id)||blocked.has(t.id));return{removed:count-tasks.length};}
  if(action==='/api/open-folder')return{demo:true};
  throw Error('此操作请在图派本地版使用');
