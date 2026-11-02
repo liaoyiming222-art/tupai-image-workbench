@@ -124,7 +124,7 @@
       "purpose": "造物集首页展台",
       "sources": [
         "icon.svg",
-        "source/batch.png"
+        "source/batch.jpg"
       ],
       "composition": "1920×1200 横向展台；上方品牌与用途，下方放大任务列表真实局部",
       "width": 1920,
@@ -139,7 +139,7 @@
       "purpose": "造物集作品卡片",
       "sources": [
         "icon.svg",
-        "source/batch.png"
+        "source/batch.jpg"
       ],
       "composition": "1200×900 卡片；双行标题，右侧能力短语，下方紧凑任务局部，独立排版",
       "width": 1200,
@@ -154,7 +154,7 @@
       "purpose": "造物集手机浏览与窄屏展示；不表示支持手机安装",
       "sources": [
         "icon.svg",
-        "source/batch.png"
+        "source/batch.jpg"
       ],
       "composition": "900×1200 专用纵向构图；独立双行标题，只截取桌面列表左侧800像素，未将桌面整图缩小",
       "width": 900,
@@ -169,7 +169,7 @@
       "purpose": "造物集详情页关键功能图",
       "sources": [
         "icon.svg",
-        "source/mapping.png"
+        "source/mapping.jpg"
       ],
       "composition": "1920×1200 深绿双栏；左侧解释真实示例编号，右侧展示完整任务详情截图，与主图展示不同功能",
       "width": 1920,
@@ -179,7 +179,7 @@
       "sha256": "3b3850575cafaa1e91b11b3aa36aca9d591818113851d7d8fee1bcda319b59cd"
     },
     {
-      "path": "source/batch.png",
+      "path": "source/batch.jpg",
       "alt": "刷新后的初始批量任务页，未经重绘或修改",
       "purpose": "真实界面原始拍摄素材",
       "sources": [
@@ -193,7 +193,7 @@
       "sha256": "8f6a5f9aa27520ea34f37eada3de119ce1617cb1210f23f437022656da0d42f7"
     },
     {
-      "path": "source/mapping.png",
+      "path": "source/mapping.jpg",
       "alt": "第二条任务的详情，展开图片编号映射和发送提示词预览；只裁取实际 dialog，原屏矩形 x=300,y=80,width=1000,height=840",
       "purpose": "真实界面原始拍摄素材",
       "sources": [
@@ -207,7 +207,7 @@
       "sha256": "33e4e1c144db86bccde4ce0a3c031ed836aa59403fd60b6c41358f3626d30269"
     },
     {
-      "path": "source/history.png",
+      "path": "source/history.jpg",
       "alt": "初始运行记录页，展示两条模拟执行记录，未经重绘或修改",
       "purpose": "真实界面原始拍摄素材",
       "sources": [

@@ -10,9 +10,9 @@
   "paidServicesUsed": false,
   "personalDataUsed": false,
   "screenshots": {
-    "batch.png": "刷新后的初始批量任务页，未经重绘或修改",
-    "mapping.png": "第二条任务的详情，展开图片编号映射和发送提示词预览；只裁取实际 dialog，原屏矩形 x=300,y=80,width=1000,height=840",
-    "history.png": "初始运行记录页，展示两条模拟执行记录，未经重绘或修改"
+    "batch.jpg": "刷新后的初始批量任务页，未经重绘或修改",
+    "mapping.jpg": "第二条任务的详情，展开图片编号映射和发送提示词预览；只裁取实际 dialog，原屏矩形 x=300,y=80,width=1000,height=840",
+    "history.jpg": "初始运行记录页，展示两条模拟执行记录，未经重绘或修改"
   },
   "crops": {
     "taskPanel": {"x":240,"y":258,"width":1328,"height":511},
@@ -21,8 +21,8 @@
   "captureSteps": [
     "node scripts/build-demo.mjs && node scripts/serve-demo.mjs",
     "用浏览器打开本地5138端口；viewport 1600×1000，100%缩放，等待缩略图加载",
-    "刷新至初始状态，保存视口为 batch.png",
-    "点击第二行详情，展开图片编号映射和发送提示词预览，按 dialog 实际矩形截图为 mapping.png",
-    "关闭详情，切换运行记录，保存视口为 history.png"
+    "刷新至初始状态，保存视口为 batch.jpg",
+    "点击第二行详情，展开图片编号映射和发送提示词预览，按 dialog 实际矩形截图为 mapping.jpg",
+    "关闭详情，切换运行记录，保存视口为 history.jpg"
   ]
 }

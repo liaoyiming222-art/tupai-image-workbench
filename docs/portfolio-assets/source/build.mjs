@@ -18,8 +18,8 @@ if(!GlobalFonts.registerFromPath(boldFile,'Portfolio Bold'))throw Error('Set POR
 const capture=JSON.parse(await fs.readFile(path.join(dir,'source/capture.json'),'utf8'));
 const P={paper:'#f5f6f2',ink:'#183c31',green:'#32634e',muted:'#617469',line:'#dbe3d8',cream:'#f2e6bd',pale:'#e7eee3'};
 const icon=await loadImage(await sharp(await fs.readFile(path.join(dir,'icon.svg'))).resize(512,512).png().toBuffer());
-const batch=await loadImage(await fs.readFile(path.join(dir,'source/batch.png')));
-const mapping=await loadImage(await fs.readFile(path.join(dir,'source/mapping.png')));
+const batch=await loadImage(await fs.readFile(path.join(dir,'source/batch.jpg')));
+const mapping=await loadImage(await fs.readFile(path.join(dir,'source/mapping.jpg')));
 const specs=[];
 function canvas(w,h,dark=false){const c=createCanvas(w,h),g=c.getContext('2d');g.fillStyle=dark?P.ink:P.paper;g.fillRect(0,0,w,h);return{c,g};}
 function text(g,s,x,y,size=28,color=P.ink,bold=false){g.fillStyle=color;g.font=`${size}px "${bold?'Portfolio Bold':'Portfolio'}"`;g.textBaseline='top';g.fillText(s,x,y);}
@@ -42,7 +42,7 @@ if(!process.argv.includes('--verify')){
   text(g,'读取需求文件夹，批量执行并回存结果',84,306,32,P.muted);
   pill(g,'多目录导入',1120,302,168);pill(g,'自动对应编号',1304,302,190);pill(g,'队列与版本回存',1510,302,238);
   shot(g,batch,capture.crops.taskPanel,80,416,1760,677,22);footer(g,1200);
-  await output(c,'hero.webp','图派本地 AI 批量作图工作台：有序任务清单、模型选择和执行状态，截图为在线演示虚构数据','造物集首页展台',['icon.svg','source/batch.png'],'1920×1200 横向展台；上方品牌与用途，下方放大任务列表真实局部');
+  await output(c,'hero.webp','图派本地 AI 批量作图工作台：有序任务清单、模型选择和执行状态，截图为在线演示虚构数据','造物集首页展台',['icon.svg','source/batch.jpg'],'1920×1200 横向展台；上方品牌与用途，下方放大任务列表真实局部');
  }
  {
   const {c,g}=canvas(1200,900);brand(g,54,40,58);text(g,'WINDOWS 本地工具',864,58,21,P.muted);
@@ -50,7 +50,7 @@ if(!process.argv.includes('--verify')){
   text(g,'按分类选模型',784,182,25,P.ink,true);text(g,'结果回到原需求目录',784,234,24,P.muted);
   pill(g,'本地 AI 批量作图',54,329,245);
   shot(g,batch,capture.crops.taskPanel,54,408,1092,420,18);footer(g,900,false,true);
-  await output(c,'card.webp','图派作品卡片：把零散需求排成一张清单，展示真实任务列表局部和按分类选择模型','造物集作品卡片',['icon.svg','source/batch.png'],'1200×900 卡片；双行标题，右侧能力短语，下方紧凑任务局部，独立排版');
+  await output(c,'card.webp','图派作品卡片：把零散需求排成一张清单，展示真实任务列表局部和按分类选择模型','造物集作品卡片',['icon.svg','source/batch.jpg'],'1200×900 卡片；双行标题，右侧能力短语，下方紧凑任务局部，独立排版');
  }
  {
   const {c,g}=canvas(900,1200);brand(g,48,46,66);text(g,'Windows 本地工具',510,70,24,P.muted);
@@ -59,7 +59,7 @@ if(!process.argv.includes('--verify')){
   text(g,'桌面界面局部',50,479,28,P.muted);
   shot(g,batch,capture.crops.mobileTaskPanel,48,526,804,472,20);
   footer(g,1200,false,true);text(g,'宣传图为窄屏构图，产品面向 Windows 桌面',48,1093,26,P.muted);
-  await output(c,'mobile.webp','图派窄屏宣传图：纵向标题与桌面任务清单局部，明确标注 Windows 本地工具和虚构示例数据','造物集手机浏览与窄屏展示；不表示支持手机安装',['icon.svg','source/batch.png'],'900×1200 专用纵向构图；独立双行标题，只截取桌面列表左侧800像素，未将桌面整图缩小');
+  await output(c,'mobile.webp','图派窄屏宣传图：纵向标题与桌面任务清单局部，明确标注 Windows 本地工具和虚构示例数据','造物集手机浏览与窄屏展示；不表示支持手机安装',['icon.svg','source/batch.jpg'],'900×1200 专用纵向构图；独立双行标题，只截取桌面列表左侧800像素，未将桌面整图缩小');
  }
  {
   const {c,g}=canvas(1920,1200,true);brand(g,80,60,70,true);text(g,'关键能力 / 图片编号映射',84,206,27,P.cream);
@@ -68,7 +68,7 @@ if(!process.argv.includes('--verify')){
   text(g,'文件夹编号    图片1 + 图片3',84,724,29,P.cream,true);text(g,'模型输入       图片1 + 图片2',84,785,29,P.cream,true);
   text(g,'原始 JSON 与素材保持原样',84,900,27,'#bbcfbf');
   shot(g,mapping,{x:0,y:0,width:mapping.width,height:mapping.height},842,114,998,838,20);footer(g,1200,true);
-  await output(c,'detail-01.webp','图派图片编号映射详情：文件夹图片3自动对应为模型输入图片2，右侧为真实运行的任务详情与发送提示词预览','造物集详情页关键功能图',['icon.svg','source/mapping.png'],'1920×1200 深绿双栏；左侧解释真实示例编号，右侧展示完整任务详情截图，与主图展示不同功能');
+  await output(c,'detail-01.webp','图派图片编号映射详情：文件夹图片3自动对应为模型输入图片2，右侧为真实运行的任务详情与发送提示词预览','造物集详情页关键功能图',['icon.svg','source/mapping.jpg'],'1920×1200 深绿双栏；左侧解释真实示例编号，右侧展示完整任务详情截图，与主图展示不同功能');
  }
  // Export actual display-size checks, including small icons on both surfaces.
  {
@@ -87,10 +87,10 @@ const official=[
  {path:'icon.svg',alt:'图派正式图标：深绿底色上叠放的图片与浅金色星芒',purpose:'品牌图标，可用于32px、40px及更大尺寸',sources:['../../public/icon.svg'],composition:'逐字节沿用项目已有正式矢量图标'},
  {path:'icon-512.png',alt:'图派512像素正式图标',purpose:'造物集产品图标',sources:['icon.svg'],composition:'正式SVG图标高质量栅格化，512×512'},
  ...(specs.length?specs:[
-  {path:'hero.webp',alt:'图派本地 AI 批量作图工作台：有序任务清单、模型选择和执行状态，截图为在线演示虚构数据',purpose:'造物集首页展台',sources:['icon.svg','source/batch.png']},
-  {path:'card.webp',alt:'图派作品卡片：把零散需求排成一张清单，展示真实任务列表局部和按分类选择模型',purpose:'造物集作品卡片',sources:['icon.svg','source/batch.png']},
-  {path:'mobile.webp',alt:'图派窄屏宣传图：纵向标题与桌面任务清单局部，明确标注 Windows 本地工具和虚构示例数据',purpose:'造物集手机浏览与窄屏展示；不表示支持手机安装',sources:['icon.svg','source/batch.png']},
-  {path:'detail-01.webp',alt:'图派图片编号映射详情：文件夹图片3自动对应为模型输入图片2，右侧为真实运行的任务详情与发送提示词预览',purpose:'造物集详情页关键功能图',sources:['icon.svg','source/mapping.png']}
+  {path:'hero.webp',alt:'图派本地 AI 批量作图工作台：有序任务清单、模型选择和执行状态，截图为在线演示虚构数据',purpose:'造物集首页展台',sources:['icon.svg','source/batch.jpg']},
+  {path:'card.webp',alt:'图派作品卡片：把零散需求排成一张清单，展示真实任务列表局部和按分类选择模型',purpose:'造物集作品卡片',sources:['icon.svg','source/batch.jpg']},
+  {path:'mobile.webp',alt:'图派窄屏宣传图：纵向标题与桌面任务清单局部，明确标注 Windows 本地工具和虚构示例数据',purpose:'造物集手机浏览与窄屏展示；不表示支持手机安装',sources:['icon.svg','source/batch.jpg']},
+  {path:'detail-01.webp',alt:'图派图片编号映射详情：文件夹图片3自动对应为模型输入图片2，右侧为真实运行的任务详情与发送提示词预览',purpose:'造物集详情页关键功能图',sources:['icon.svg','source/mapping.jpg']}
  ])
 ];
 const sourceImages=[...Object.entries(capture.screenshots).map(([name,description])=>({path:'source/'+name,alt:description,purpose:'真实界面原始拍摄素材',sources:['../../'+capture.entry],composition:description})),{path:'source/display-check.webp',alt:'首页960像素、卡片400像素、窄屏360像素与32和40像素图标的浅深背景展示检查',purpose:'视觉验收联系表',sources:['hero.webp','card.webp','mobile.webp','icon.svg'],composition:'按照实际展示尺寸组合，不用于产品界面宣传'}];
