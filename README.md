@@ -44,7 +44,7 @@ npm start
 
 Windows 推荐从 [Releases](https://github.com/liaoyiming222-art/tupai-image-workbench/releases/latest) 下载本地版并解压，安装 Node.js 22 或更新版本后双击 `图派启动器.exe`。启动器会检测已有服务、后台启动并等待就绪，然后打开独立的 Edge 应用窗口（找不到 Edge 时使用默认浏览器），不需要打开 Codex 或手动输入地址。
 
-从源码使用时，双击 `启动工作台.cmd`，会在首次启动时用 Windows .NET Framework 编译启动器。停止时双击 `停止工作台.cmd`；这两个主入口均不调用 PowerShell。原有 `.ps1` 文件仅作兼容保留。首次使用目录组件时，通过 Windows 自带 .NET Framework 编译器编译 `native/FolderPicker.cs`。
+从源码使用时，双击 `启动工作台.cmd`，会在首次启动时用 Windows .NET Framework 编译启动器。停止时双击 `停止工作台.cmd`；这两个主入口均不调用 PowerShell。旧 PowerShell 启停入口已退役，统一使用 `.cmd` 入口。首次使用目录组件时，通过 Windows 自带 .NET Framework 编译器编译 `native/FolderPicker.cs`。
 
 生成带图标的启动器：`npm run build:launcher`。创建桌面快捷方式：双击 `创建桌面快捷方式.cmd`，或在项目目录运行 `图派启动器.exe --install-shortcut`。快捷方式指向项目中的 exe，不要把 exe 单独移出项目目录。首次版本依赖本机 Node.js，未捆绑运行环境。
 
