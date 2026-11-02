@@ -8,7 +8,7 @@ files.set('transport.mjs',fs.readFileSync(path.join(root,'demo/src/transport.mjs
 files.set('demo.css',fs.readFileSync(path.join(root,'demo/src/demo.css'),'utf8'));
 files.set('layout.mjs',fs.readFileSync(path.join(root,'demo/src/layout.mjs'),'utf8'));
 files.set('viewer.mjs',fs.readFileSync(path.join(root,'demo/src/viewer.mjs'),'utf8'));
-for(const file of ['task-plan.mjs','catalog.mjs'])files.set(file,fs.readFileSync(path.join(root,'lib',file),'utf8'));
+for(const file of ['task-plan.mjs','catalog.mjs','reporting.mjs'])files.set(file,fs.readFileSync(path.join(root,'lib',file),'utf8'));
 let html=fs.readFileSync(path.join(root,'public/index.html'),'utf8');
 html=html.replace('图派 · 本地作图工作台','图派 · 在线演示版').replace('</head>','<meta name="description" content="图派 AI 批量作图工作台在线演示：使用示例体验导入、图片编号映射、模型选择、队列和结果归档。"><link rel="stylesheet" href="/demo.css"></head>').replace('<body>','<body class="demo-mode">');
 html=html.replace(/<div class="sidebar-note">.*?<\/div>/,'<details class="demo-info" open><summary><span class="live-dot"></span><span class="demo-title">在线演示版</span><span class="demo-mobile-title">演示</span><span class="demo-menu-chevron" aria-hidden="true">⌄</span></summary><div class="demo-info-content"><p>使用示例素材与模拟结果，真实作图请使用本地版。</p><a class="button small demo-download" href="https://github.com/liaoyiming222-art/tupai-image-workbench/releases/latest" target="_blank" rel="noopener">获取本地版 ↗</a><button class="demo-reset" data-action="reset-demo">重置演示</button></div></details>');

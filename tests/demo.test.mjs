@@ -28,3 +28,22 @@ test('演示部署目录仅包含静态演示内容，不包含本地服务和�
  assert.match(fs.readFileSync('demo/public/index.html','utf8'),/使用示例素材与模拟结果/);
  assert.equal(JSON.parse(fs.readFileSync('package.json')).license,'UNLICENSED');
 });
+
+test('新版演示支持多目录导入、历史筛选与看板，移除列表保留执行历史',async()=>{
+ const originalFetch=globalThis.fetch;globalThis.fetch=()=>{throw Error('演示版不得访问网络');};
+ try{
+  await request('/api/demo-reset',{});
+  const folders=await request('/api/clipboard-folders',{});assert.equal(folders.entries.length,2);
+  const before=await request('/api/history');assert.equal(before.total,2);
+  await request('/api/import',{paths:[folders.paths[0]]});
+  const state=await request('/api/state'),batch=state.batches.find(b=>b.id===state.currentBatchId);
+  assert.equal(batch.taskIds.length,2);assert.equal(state.batches.length,2);
+  const failed=await request('/api/history?status=failed&model=gpt');assert.equal(failed.total,1);
+  assert.equal((await request('/api/job?id='+failed.jobs[0].id)).canResume,true);
+  await request('/api/time-setting',{minutes:12});const report=await request('/api/dashboard');
+  assert.equal(report.images,1);assert.equal(report.minutes,12);assert.equal(report.submissions,2);
+  await request('/api/batch-remove',{batchId:state.currentBatchId,all:true});
+  assert.equal((await request('/api/state')).batches.at(-1).taskIds.length,0);
+  assert.equal((await request('/api/history')).total,2);
+ }finally{globalThis.fetch=originalFetch;await request('/api/demo-reset',{});}
+});

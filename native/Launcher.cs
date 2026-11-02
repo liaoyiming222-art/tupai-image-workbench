@@ -30,11 +30,27 @@ internal static class Launcher {
   for(int i=0;i<50;i++){if(Health()!=null)return;if(server.HasExited&&server.ExitCode!=0)throw new Exception("本地服务启动失败，请查看 .local/service.log 和 .local/launcher.log。");Thread.Sleep(250);}
   throw new Exception("本地服务尚未就绪，请稍后重试；详情见 .local/service.log。可能是端口已被其他程序占用。");
  }
+ static void EnsureServer(){
+  string status=Health();if(status==null){StartServer();status=Health();}
+  var serializer=new JavaScriptSerializer(){MaxJsonLength=Int32.MaxValue};
+  var data=serializer.Deserialize<System.Collections.Generic.Dictionary<string,object>>(status);
+  if(data.ContainsKey("apiRevision")&&Convert.ToInt32(data["apiRevision"])==3)return;
+  bool pending=Convert.ToInt32(data["active"])>0;
+  var jobs=data["jobs"] as System.Collections.IEnumerable;
+  if(jobs!=null)foreach(object item in jobs){var job=item as System.Collections.Generic.Dictionary<string,object>;if(job!=null&&job.ContainsKey("status")&&Convert.ToString(job["status"])=="queued")pending=true;}
+  if(pending)throw new Exception("检测到旧版后台仍有任务排队或执行。请等待任务结束后，使用停止工作台再重新启动，以加载新版功能。");
+  Stop();for(int i=0;i<40;i++){if(Health()==null)break;Thread.Sleep(100);}
+  if(Health()!=null)throw new Exception("旧版后台尚未退出，请稍后重新启动工作台。");
+  StartServer();status=Health();data=serializer.Deserialize<System.Collections.Generic.Dictionary<string,object>>(status);
+  if(!data.ContainsKey("apiRevision")||Convert.ToInt32(data["apiRevision"])!=3)throw new Exception("后台服务版本与启动器不一致，请使用同一目录下的完整新版程序。");
+ }
  static void OpenWindow(){
   string edge=Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86),"Microsoft","Edge","Application","msedge.exe");
   if(!File.Exists(edge))edge=Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles),"Microsoft","Edge","Application","msedge.exe");
-  if(File.Exists(edge))Process.Start(new ProcessStartInfo(edge,"--app=\""+Url+"\""){UseShellExecute=true});
-  else Process.Start(new ProcessStartInfo(Url){UseShellExecute=true});
+  if(!File.Exists(edge))throw new Exception("图派需要 Microsoft Edge 才能打开隔离的应用窗口，请安装 Edge 后重试。");
+  string profile=Path.Combine(Root,".local","browser-profile");Directory.CreateDirectory(profile);
+  Process.Start(new ProcessStartInfo(edge,"--user-data-dir=\""+profile+"\" --disable-extensions --no-first-run --no-default-browser-check --app=\""+Url+"\""){UseShellExecute=true});
+
  }
  static void Shortcut(){
   string desktop=Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
@@ -48,7 +64,7 @@ internal static class Launcher {
  }
  static void Stop(){
   string status=Health();if(status==null)return;
-  var data=new JavaScriptSerializer().Deserialize<System.Collections.Generic.Dictionary<string,object>>(status);
+  var data=new JavaScriptSerializer(){MaxJsonLength=Int32.MaxValue}.Deserialize<System.Collections.Generic.Dictionary<string,object>>(status);
   var req=(HttpWebRequest)WebRequest.Create(Url+"/api/shutdown");req.Proxy=null;req.Timeout=10000;req.Method="POST";req.ContentType="application/json";req.Headers["X-Local-Token"]=(string)data["token"];
   byte[] bytes=Encoding.UTF8.GetBytes("{}");req.ContentLength=bytes.Length;using(var stream=req.GetRequestStream())stream.Write(bytes,0,bytes.Length);
   try{using(var response=req.GetResponse()){} }catch(WebException e){if(e.Response!=null)throw new Exception("仍有任务正在处理，请先暂停队列并等待当前任务结束，再退出服务。");throw;}
@@ -72,7 +88,7 @@ internal static class Launcher {
    if(args.Length>0&&args[0]=="--stop"){Stop();return 0;}
    using(var mutex=new Mutex(false,"Local\\TupaiLocalLauncher")){
     if(!mutex.WaitOne(0))return 0;
-    try{if(!File.Exists(Path.Combine(Root,"server.mjs")))throw new Exception("请将启动器保留在图派项目文件夹中，不要单独移动 exe；可使用桌面快捷方式。");if(Health()==null)StartServer();OpenWindow();}finally{mutex.ReleaseMutex();}
+    try{if(!File.Exists(Path.Combine(Root,"server.mjs")))throw new Exception("请将启动器保留在图派项目文件夹中，不要单独移动 exe；可使用桌面快捷方式。");EnsureServer();OpenWindow();}finally{mutex.ReleaseMutex();}
    }return 0;
   }catch(Exception e){if(args.Length>0&&args[0]=="--self-test")return 1;MessageBox.Show(e.Message,"图派",MessageBoxButtons.OK,MessageBoxIcon.Information);return 1;}
  }
