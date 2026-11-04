@@ -1,0 +1,342 @@
+[
+  {
+    "file": "tupai-overview-desktop.webp",
+    "width": 1920,
+    "height": 1200,
+    "panels": [
+      [
+        "overview",
+        240,
+        140,
+        1094,
+        498,
+        40,
+        145,
+        1840
+      ]
+    ],
+    "alt": "图派实际模拟演示工作台，筛选待执行并选中客厅窗帘调整 T002",
+    "mobile": false,
+    "result": false
+  },
+  {
+    "file": "tupai-overview-mobile.webp",
+    "width": 900,
+    "height": 1200,
+    "panels": [
+      [
+        "overview",
+        318,
+        348,
+        208,
+        39,
+        60,
+        75,
+        780
+      ],
+      [
+        "overview",
+        256,
+        451,
+        30,
+        132,
+        60,
+        320,
+        120
+      ],
+      [
+        "overview",
+        347,
+        451,
+        150,
+        132,
+        220,
+        320,
+        600
+      ]
+    ],
+    "alt": "图派桌面演示局部，展示选中的客厅 T002 与餐厅相邻待执行任务",
+    "mobile": true,
+    "result": false
+  },
+  {
+    "file": "tupai-mapping-desktop.webp",
+    "width": 1600,
+    "height": 1200,
+    "panels": [
+      [
+        "mapping",
+        208,
+        218,
+        600,
+        65,
+        60,
+        80,
+        1480
+      ],
+      [
+        "mapping",
+        208,
+        413,
+        600,
+        168,
+        60,
+        270,
+        1480
+      ],
+      [
+        "mapping",
+        208,
+        600,
+        600,
+        145,
+        60,
+        710,
+        1480
+      ]
+    ],
+    "alt": "图派实际演示中的文件夹图片3、模型输入图片2及原要求与发送提示词变化",
+    "mobile": false,
+    "result": false
+  },
+  {
+    "file": "tupai-mapping-number-mobile.webp",
+    "width": 900,
+    "height": 1200,
+    "panels": [
+      [
+        "mapping",
+        200,
+        98,
+        196,
+        85,
+        60,
+        55,
+        780
+      ],
+      [
+        "mapping",
+        208,
+        430,
+        210,
+        152,
+        60,
+        470,
+        780
+      ]
+    ],
+    "alt": "图派桌面演示局部，客厅 T002 的文件夹图片3对应模型输入图片2",
+    "mobile": true,
+    "result": false
+  },
+  {
+    "file": "tupai-mapping-prompt-mobile.webp",
+    "width": 900,
+    "height": 1200,
+    "panels": [
+      [
+        "mapping",
+        200,
+        98,
+        196,
+        85,
+        60,
+        55,
+        780
+      ],
+      [
+        "mapping",
+        390,
+        250,
+        190,
+        35,
+        60,
+        490,
+        780
+      ],
+      [
+        "mapping",
+        390,
+        680,
+        190,
+        36,
+        60,
+        770,
+        780
+      ]
+    ],
+    "alt": "图派桌面演示局部，同一客厅 T002 原要求引用图片3、发送提示词引用图片2",
+    "mobile": true,
+    "result": false
+  },
+  {
+    "file": "tupai-queue-desktop.webp",
+    "width": 1600,
+    "height": 1200,
+    "panels": [
+      [
+        "queue",
+        244,
+        350,
+        260,
+        286,
+        60,
+        170,
+        620
+      ],
+      [
+        "queue",
+        683,
+        350,
+        78,
+        286,
+        710,
+        170,
+        186
+      ],
+      [
+        "queue",
+        1043,
+        350,
+        225,
+        286,
+        926,
+        170,
+        536
+      ]
+    ],
+    "alt": "图派实际模拟运行记录的三个独立列局部，包含已完成、排队及失败和继续查询下载操作",
+    "mobile": false,
+    "result": false
+  },
+  {
+    "file": "tupai-queue-mobile.webp",
+    "width": 900,
+    "height": 1200,
+    "panels": [
+      [
+        "queue",
+        244,
+        575,
+        110,
+        61,
+        60,
+        120,
+        450
+      ],
+      [
+        "queue",
+        683,
+        575,
+        78,
+        35,
+        540,
+        120,
+        300
+      ],
+      [
+        "queue",
+        353,
+        575,
+        150,
+        61,
+        60,
+        420,
+        780
+      ],
+      [
+        "queue",
+        1043,
+        575,
+        225,
+        61,
+        60,
+        760,
+        780
+      ]
+    ],
+    "alt": "图派桌面模拟演示同一餐厅 T002 失败记录的任务、模型、状态与继续查询下载按钮局部",
+    "mobile": true,
+    "result": false
+  },
+  {
+    "file": "tupai-result-shared.webp",
+    "width": 1600,
+    "height": 1200,
+    "panels": [
+      [
+        "result",
+        136,
+        24,
+        1008,
+        672,
+        60,
+        60,
+        1380
+      ]
+    ],
+    "alt": "图派客厅窗帘调整 T002 的完整预设 SVG 示例结果，非模型生成效果",
+    "mobile": false,
+    "result": true
+  },
+  {
+    "file": "tupai-record-desktop.webp",
+    "width": 1600,
+    "height": 1200,
+    "panels": [
+      [
+        "record",
+        200,
+        205,
+        460,
+        205,
+        60,
+        220,
+        1480
+      ]
+    ],
+    "alt": "图派实际模拟演示中客厅窗帘调整 T002 的完成记录、模型及示例结果路径",
+    "mobile": false,
+    "result": false
+  },
+  {
+    "file": "tupai-record-mobile.webp",
+    "width": 900,
+    "height": 1200,
+    "panels": [
+      [
+        "record",
+        200,
+        205,
+        196,
+        82,
+        60,
+        70,
+        780
+      ],
+      [
+        "record",
+        208,
+        290,
+        190,
+        24,
+        60,
+        430,
+        780
+      ],
+      [
+        "record",
+        200,
+        320,
+        230,
+        90,
+        60,
+        650,
+        780
+      ]
+    ],
+    "alt": "图派桌面演示局部，与预设 SVG 对应的客厅 T002 模拟完成记录及示例路径",
+    "mobile": true,
+    "result": false
+  }
+]

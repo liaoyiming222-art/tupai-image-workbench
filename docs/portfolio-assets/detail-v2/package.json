@@ -1,0 +1,1 @@
+{"name":"tupai-detail-v2-assets","private":true,"type":"module","scripts":{"build":"node source/build.mjs"},"devDependencies":{"@napi-rs/canvas":"0.1.100","sharp":"0.35.5"}}

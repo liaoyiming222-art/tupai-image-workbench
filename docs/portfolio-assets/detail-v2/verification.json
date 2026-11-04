@@ -1,0 +1,94 @@
+{
+  "taskId": "detail-v2-20261104-tupai",
+  "codeSha": "f5a1da33ca78b2e543a782cac5fa931392cec95b",
+  "deliveredWebpCount": 10,
+  "dimensionsAndHashes": [
+    {
+      "path": "tupai-overview-desktop.webp",
+      "dimensions": true,
+      "sha256": true,
+      "format": true
+    },
+    {
+      "path": "tupai-overview-mobile.webp",
+      "dimensions": true,
+      "sha256": true,
+      "format": true
+    },
+    {
+      "path": "tupai-mapping-desktop.webp",
+      "dimensions": true,
+      "sha256": true,
+      "format": true
+    },
+    {
+      "path": "tupai-mapping-number-mobile.webp",
+      "dimensions": true,
+      "sha256": true,
+      "format": true
+    },
+    {
+      "path": "tupai-mapping-prompt-mobile.webp",
+      "dimensions": true,
+      "sha256": true,
+      "format": true
+    },
+    {
+      "path": "tupai-queue-desktop.webp",
+      "dimensions": true,
+      "sha256": true,
+      "format": true
+    },
+    {
+      "path": "tupai-queue-mobile.webp",
+      "dimensions": true,
+      "sha256": true,
+      "format": true
+    },
+    {
+      "path": "tupai-result-shared.webp",
+      "dimensions": true,
+      "sha256": true,
+      "format": true
+    },
+    {
+      "path": "tupai-record-desktop.webp",
+      "dimensions": true,
+      "sha256": true,
+      "format": true
+    },
+    {
+      "path": "tupai-record-mobile.webp",
+      "dimensions": true,
+      "sha256": true,
+      "format": true
+    }
+  ],
+  "displayChecks": {
+    "mobile": [
+      288,
+      358
+    ],
+    "desktop": [
+      829,
+      1184
+    ],
+    "method": "Actual downscaled PNGs inspected; screenshot fragments preserve natural ratios",
+    "scope": "Core keys in independent close-ups; overview secondary small text is contextual"
+  },
+  "truthfulness": {
+    "baselineArchived": true,
+    "originalWorkspaceChangesExcluded": true,
+    "paidGenerationCalls": 0,
+    "domOrRuntimeDataChanges": false,
+    "scenarioFallbackDocumented": true,
+    "actualDiskArchiveVerified": false
+  },
+  "limitations": [
+    "审定基线不提供新增/重命名示例需求入口；按任务包允许回退，整组使用真实预设示例重新实拍",
+    "总览筛选两条待执行任务，并选中客厅 T002；保留原始总数摘要，不伪装为全新三任务",
+    "运行记录实拍已完成、暂停队列中的排队中与失败；排队属于进行中分类，不冒充已开始生成",
+    "基线运行记录不支持行选中；保留失败行及实际可用继续查询下载按钮，手机拆为同一失败记录的独立局部",
+    "手机图为桌面截图独立裁切组合，各局部用留白分开；不重画界面或改DOM"
+  ]
+}
