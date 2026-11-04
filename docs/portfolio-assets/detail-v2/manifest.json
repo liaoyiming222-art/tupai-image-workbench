@@ -1,5 +1,7 @@
 {
   "schemaVersion": 1,
+  "revisionTaskId": "detail-v2-20261104-tupai-r1",
+  "revisionOfAssetCommit": "94074c58d1c8beedd7b2840d3c6afe5a48b505b9",
   "taskId": "detail-v2-20261104-tupai",
   "productId": "tupai",
   "repository": "https://github.com/liaoyiming222-art/tupai-image-workbench",
@@ -162,7 +164,7 @@
       "width": 900,
       "height": 1200,
       "format": "webp",
-      "sha256": "66887ac5abbe5457214b3519b1d8a5c677eed5269fffb48a9b939e32ce178e06",
+      "sha256": "83f3adad234d13f65575ae359074ee49e9ae9b1d2c496cb9ad88462eafde3291",
       "alt": "图派桌面演示局部，与预设 SVG 对应的客厅 T002 模拟完成记录及示例路径",
       "purpose": "手机作品集展示的桌面界面局部",
       "sourceType": "actual-running-demo-screenshot-crops",

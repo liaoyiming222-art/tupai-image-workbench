@@ -90,5 +90,55 @@
     "运行记录实拍已完成、暂停队列中的排队中与失败；排队属于进行中分类，不冒充已开始生成",
     "基线运行记录不支持行选中；保留失败行及实际可用继续查询下载按钮，手机拆为同一失败记录的独立局部",
     "手机图为桌面截图独立裁切组合，各局部用留白分开；不重画界面或改DOM"
-  ]
+  ],
+  "revision": {
+    "taskId": "detail-v2-20261104-tupai-r1",
+    "originalTaskId": "detail-v2-20261104-tupai",
+    "baselineAssetCommit": "94074c58d1c8beedd7b2840d3c6afe5a48b505b9",
+    "target": "tupai-record-mobile.webp",
+    "width": 900,
+    "height": 1200,
+    "sourceScreenshotUnchanged": true,
+    "otherNineWebpByteIdentical": [
+      "tupai-overview-desktop.webp",
+      "tupai-overview-mobile.webp",
+      "tupai-mapping-desktop.webp",
+      "tupai-mapping-number-mobile.webp",
+      "tupai-mapping-prompt-mobile.webp",
+      "tupai-queue-desktop.webp",
+      "tupai-queue-mobile.webp",
+      "tupai-result-shared.webp",
+      "tupai-record-desktop.webp"
+    ],
+    "otherEighteenProofsByteIdentical": true,
+    "cropGeometry": {
+      "identity": [
+        200,
+        205,
+        196,
+        86
+      ],
+      "modelStatus": [
+        202,
+        289,
+        202,
+        28
+      ]
+    },
+    "keyFontEstimateAt288": {
+      "taskPath": 14,
+      "modelAndCompleted": 14.8
+    },
+    "keyFontEstimateAt358": {
+      "taskPath": 17.4,
+      "modelAndCompleted": 18.4
+    },
+    "visualChecks": [
+      "900px complete image",
+      "288px proof: intact task path descenders, first model character, complete completed state with margins",
+      "358px proof: same intact fields and separated panels"
+    ],
+    "method": "Expand genuine source crop boundaries and reposition with proportional scaling; no redrawing, stretching, source screenshot or state edits",
+    "remainingGap": "No new capture or production output validation; all original simulation boundaries retained"
+  }
 }
